@@ -1,0 +1,19 @@
+# ide/system
+*.pyc
+__pycache
+.idea
+.DS_Store
+*.ipynb_checkpoints
+*.pdf
+*.xlsx
+*.csv
+*.csv
+.vscode/launch.json
+.vscode/launch.json-backup
+
+# data
+data
+postgresql_data
+.env_2server
+DawnCache/
+GPUCache/

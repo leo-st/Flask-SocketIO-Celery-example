@@ -1,0 +1,30 @@
+name: flask_app_template
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10.5
+  - pip
+  - pip:
+    - Flask==2.2.2
+    - Flask-SQLAlchemy==2.5.1
+    - SQLAlchemy==1.4.46
+    - psycopg2-binary==2.9.3
+    - Flask-JWT-Extended==4.4.4
+    - Flask-Cors==3.0.10
+    - pandas==1.4.3
+    - redis==4.3.4
+    - pangres==4.1.2
+    - sqlacodegen
+    - celery==5.2.7
+    - simplejson==3.18.1
+    - ujson==5.7.0
+    - XlsxWriter==3.0.8
+    - ipykernel==6.16.0
+    - openpyxl==3.0.10
+    - scikit-learn==1.1.3
+    - paramiko==2.12.0
+    - pyarrow==10.0.1
+    - holidays==0.17.2
+    - Flask-SocketIO==5.3.3
+    - gevent==22.10.2

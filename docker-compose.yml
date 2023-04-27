@@ -1,0 +1,58 @@
+version: '3.7'
+
+services:
+  postgres_host:
+    container_name: postgres_host
+    build: 
+      context: ./db
+    ports:
+      - 5455:5432
+    volumes:
+      - "./db/postgresql_data/:/postgresql_data/"
+    networks:
+      - flask_template_network
+    env_file:
+      - ./.env
+  api:
+    container_name: api
+    build:
+      context: ./
+      dockerfile: api/Dockerfile
+    command: gunicorn -w 1 --bind 0.0.0.0:5000 app:create_app(True) -k gevent --capture-output --log-level debug --access-logfile '-' --error-logfile '-'
+    ports:
+      - 5005:5000
+    networks:
+      - flask_template_network
+    env_file:
+      - ./.env
+    depends_on:
+      - postgres_host
+      - redis_cache
+  redis_cache:
+    container_name: redis_cache
+    image: redis:6.2-alpine
+    ports:
+      - 6381:6381
+    networks:
+      - flask_template_network
+    command:
+      - /bin/sh
+      - -c 
+      - redis-server --port 6381 --save 20 1 --loglevel warning --requirepass "$${REDIS_PASSWORD:?REDIS_PASSWORD variable is not set}"
+    env_file:
+      - ./.env
+  celery_worker:
+    build:
+      context: ./
+      dockerfile: api/Dockerfile
+    hostname: tasks
+    entrypoint: celery
+    command: -A celery_worker.celery_worker.celery worker -l info -E
+    depends_on:
+      - redis_cache
+    env_file:
+      - ./.env
+    networks:
+      - flask_template_network  
+networks:
+  flask_template_network:
