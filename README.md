@@ -38,7 +38,8 @@ You can also stop API container and debug locally. Everything is setup in .vscod
 ### How to test this app?
 You can run test.html which is small script to simulate websocket communication.
 You can create 2 tabs for 2 different users.
-In first form login with username:1  and in second username: 2. This will put each user 1(administrator@test.com) and  user 2 (username@test.com) in seperate rooms. We do it in this way so that users don't get messages from another user.
+In first form login with username:1  and in second username: 2. This will put each user 1(administrator@test.com) and  user 2 (username@test.com) in seperate rooms. Password in here is not important.
+We do it in this way so that users don't get messages from another user.
 ![Alt text](./logging_in.png?raw=true "Initial screen")
 
 There is a postman collection which you can import in POSTMAN.
